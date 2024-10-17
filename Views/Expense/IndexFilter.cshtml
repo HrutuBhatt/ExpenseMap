@@ -1,0 +1,55 @@
+﻿@model Expense_Manager.Models.ExpenseFilterViewModel
+
+<form method="get" asp-action="IndexFilter">
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="selectedCategoryId" class="form-control">
+            <option value="0">All Categories</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.CategoryId" selected="@(Model.SelectedCategoryId == category.CategoryId ? "selected" : null)">
+                    @category.CategoryName
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="month">Month</label>
+        <select id="month" name="selectedMonth" class="form-control">
+            <option value="0">All Months</option>
+            @foreach (var month in Enum.GetValues(typeof(Month)).Cast<Month>())
+            {
+                var monthValue = (int)month;
+                <option value="@monthValue" selected="@(Model.SelectedMonth == (int)month ? "selected" : null)">
+                    @month.ToString()
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model.Expenses)
+        {
+            <tr>
+                <td>@expense.Category.CategoryName</td>
+                <td>@expense.Amount.ToString("C")</td>
+                <td>@expense.Date.ToShortDateString()</td>
+                <td>@expense.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

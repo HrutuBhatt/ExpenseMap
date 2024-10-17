@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MonthlySummaryViewModel>
+@{
+    // Variables to hold the total expense and income
+    decimal totalExpensesSum = 0;
+    decimal totalIncomeSum = 0;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Total Expense</th>
+            <th>Total Income</th>
+            <th>Savings</th>
+            <th>Savings Percentage</th>
+            <th>Monthly Analytics</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var savings = item.TotalIncome - item.TotalExpense;
+            var savingsPercentage = item.TotalIncome != 0 ? (savings / item.TotalIncome) * 100 : 0;
+
+            totalExpensesSum += item.TotalExpense;
+            totalIncomeSum += item.TotalIncome;
+            <tr>
+                <td>@item.Month</td>
+                <td>@item.TotalExpense.ToString("C")</td> <!-- Format as currency -->
+                <td>@item.TotalIncome.ToString("C")</td> <!-- Format as currency -->
+                <td>@savings</td>
+                <td>@savingsPercentage.ToString("F2")%</td>
+                <td>
+                    <a asp-action="MonthlyAnalytics" asp-route-month="@item.Month">View Analytics</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>@totalExpensesSum</strong></td>
+            <td><strong>@totalIncomeSum</strong></td>
+            <td><strong>@(totalIncomeSum - totalExpensesSum)</strong></td> <!-- Total savings -->
+            <td><strong>@((totalIncomeSum != 0 ? ((totalIncomeSum - totalExpensesSum) / totalIncomeSum) * 100 : 0).ToString("F2"))%</strong></td> <!-- Total savings percentage -->
+            <td></td>
+        </tr>
+    </tbody>
+</table>

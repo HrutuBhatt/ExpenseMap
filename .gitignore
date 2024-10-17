@@ -1,0 +1,12 @@
+.vs/
+obj/
+bin/
+Expense_Manager.sln/
+Areas/
+Properties/
+
+appsettings.Development.json/
+appsettings.json/
+Expense_Manager.csproj/
+Expense_Manager.csproj.user/
+

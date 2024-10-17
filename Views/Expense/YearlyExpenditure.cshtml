@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Expense_Manager.Models.YearlyExpenseViewModel>
+
+<canvas id="yearlyExpenditureChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('yearlyExpenditureChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line', // or 'bar' for a bar chart
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(m => m.Month))), // X-axis labels (months)
+            datasets: [{
+                label: 'Monthly Expenses',
+                data: @Html.Raw(Json.Serialize(Model.Select(m => m.TotalAmount))), // Y-axis data (total expenses)
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
