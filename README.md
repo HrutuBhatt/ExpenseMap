@@ -1,6 +1,7 @@
 # MoneyMap
 An Expense Manger webapp to manage your daily expenses effectively.<br/>
-It is .NET Core MVC Project. <hr>
+It is .NET Core MVC Project. (Change the branch to master)
+<hr>
 <h4>Features</h4>
 <ul>
   <li>User Authentication</li>
