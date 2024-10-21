@@ -19,4 +19,7 @@ It is .NET Core MVC Project. (Change the branch to master)
 <li>Expenses</li>
 <li>Categories</li>
 <li>Income sources</li>
+
 <li>Payment Method</li>
+By Hrutu Bhatt CE095
+   Devanshi Dedaniya CE099
